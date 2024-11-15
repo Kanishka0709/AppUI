@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(RailwayNavigationApp());
+  runApp(const RailwayNavigationApp());
 }
 
 class RailwayNavigationApp extends StatelessWidget {
+  const RailwayNavigationApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,13 +16,15 @@ class RailwayNavigationApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         fontFamily: 'CourierPrime',
       ),
-      home: NavigationMainPage(),
+      home: const NavigationMainPage(),
     );
   }
 }
 
 // Main Page with Navigation Bar
 class NavigationMainPage extends StatefulWidget {
+  const NavigationMainPage({super.key});
+
   @override
   _NavigationMainPageState createState() => _NavigationMainPageState();
 }
@@ -29,9 +33,9 @@ class _NavigationMainPageState extends State<NavigationMainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    WelcomePage(),
-    SearchPage(),
-    ProfilePage(),
+    const WelcomePage(),
+    const SearchPage(),
+    const ProfilePage(),
   ];
 
   @override
@@ -69,15 +73,40 @@ class _NavigationMainPageState extends State<NavigationMainPage> {
 
 // Welcome Page
 class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text("Railway Navigator", style: TextStyle(fontFamily: 'CourierPrime')),
+        backgroundColor: Colors.deepPurple,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.language),
+            onPressed: () {
+              // Implement language change functionality here
+            },
+          ),
+        ],
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
+              'नमस्ते',
+              style: TextStyle(
+                color: Colors.deepPurpleAccent,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'CourierPrime',
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 10),
+            const Text(
               'Welcome to Railway Navigator',
               style: TextStyle(
                 color: Colors.deepPurpleAccent,
@@ -87,55 +116,71 @@ class WelcomePage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 10),
-            Text(
-              'Easily navigate within stations',
-              style: TextStyle(
-                color: Colors.grey,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                fontFamily: 'CourierPrime',
+            const SizedBox(height: 20),
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Select Station',
+                labelStyle: TextStyle(color: Colors.deepPurpleAccent),
+                prefixIcon: Icon(Icons.train, color: Colors.deepPurpleAccent),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.deepPurple),
+                ),
               ),
-              textAlign: TextAlign.center,
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 20),
+            const TextField(
+              decoration: InputDecoration(
+                labelText: 'Platform Number',
+                labelStyle: TextStyle(color: Colors.deepPurpleAccent),
+                prefixIcon: Icon(Icons.directions_railway, color: Colors.deepPurpleAccent), // Changed icon
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.deepPurpleAccent),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.deepPurple),
+                ),
+              ),
+            ),
+            const SizedBox(height: 30),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.deepPurple,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20)),
               ),
-              child: Text(
-                'Login',
+              onPressed: () {
+                // Implement start navigation functionality
+              },
+              child: const Text(
+                'Start Navigation',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontFamily: 'CourierPrime',
                 ),
               ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
-                );
-              },
             ),
-            SizedBox(height: 15),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SignUpPage()),
-                );
-              },
-              child: Text(
-                'Sign Up',
-                style: TextStyle(
-                  color: Colors.deepPurpleAccent,
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'CourierPrime',
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.report_problem, color: Colors.redAccent),
+                  onPressed: () {
+                    // Navigate to complaint registration
+                  },
                 ),
-              ),
+                const SizedBox(width: 20),
+                IconButton(
+                  icon: const Icon(Icons.more_horiz, color: Colors.greenAccent),
+                  onPressed: () {
+                    // Show more options
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -146,19 +191,21 @@ class WelcomePage extends StatelessWidget {
 
 // Search Page with Clickable Options
 class SearchPage extends StatelessWidget {
+  const SearchPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Search Nearby", style: TextStyle(fontFamily: 'CourierPrime')),
+        title: const Text("Search Nearby", style: TextStyle(fontFamily: 'CourierPrime')),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Find Nearby Facilities',
               style: TextStyle(
                 color: Colors.deepPurpleAccent,
@@ -167,7 +214,7 @@ class SearchPage extends StatelessWidget {
                 fontFamily: 'CourierPrime',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -229,10 +276,10 @@ class SearchPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(icon, size: 40, color: Colors.white),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -249,20 +296,20 @@ class SearchPage extends StatelessWidget {
 // Placeholder Page for Search Results
 class SearchResultPage extends StatelessWidget {
   final String label;
-  SearchResultPage(this.label);
+  const SearchResultPage(this.label, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("$label Results", style: TextStyle(fontFamily: 'CourierPrime')),
+        title: Text("$label Results", style: const TextStyle(fontFamily: 'CourierPrime')),
         backgroundColor: Colors.deepPurple,
       ),
       body: Center(
         child: Text(
           'Results for $label',
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
@@ -274,84 +321,201 @@ class SearchResultPage extends StatelessWidget {
   }
 }
 
-// Profile Page with Editable Fields
+// Profile Page with Login Button
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Profile", style: TextStyle(fontFamily: 'CourierPrime')),
+        title: const Text("Profile", style: TextStyle(fontFamily: 'CourierPrime')),
         backgroundColor: Colors.deepPurple,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
+      body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _buildProfileField('Name'),
-            _buildProfileField('Age'),
-            _buildProfileField('Mobile'),
-            _buildProfileField('Email'),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'CourierPrime',
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUpPage()),
+                );
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.deepPurple,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+              ),
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'CourierPrime',
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
-
-  Widget _buildProfileField(String label) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: label,
-          labelStyle: TextStyle(color: Colors.deepPurpleAccent),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.deepPurpleAccent),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.deepPurple),
-          ),
-        ),
-        style: TextStyle(color: Colors.white),
-      ),
-    );
-  }
 }
 
+// Login Page
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("User Login", style: TextStyle(fontFamily: 'CourierPrime')),
+        title: const Text('Login', style: TextStyle(fontFamily: 'CourierPrime')),
         backgroundColor: Colors.deepPurple,
       ),
       body: Center(
-        child: Text(
-          'Login Page Placeholder',
-          style: TextStyle(color: Colors.white, fontSize: 18),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Sign in to your account',
+                style: TextStyle(
+                  color: Colors.deepPurpleAccent,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'CourierPrime',
+                ),
+              ),
+              const SizedBox(height: 20),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Email Address',
+                  prefixIcon: Icon(Icons.email, color: Colors.deepPurpleAccent),
+                ),
+              ),
+              const SizedBox(height: 15),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  prefixIcon: Icon(Icons.lock, color: Colors.deepPurpleAccent),
+                ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                ),
+                onPressed: () {},
+                child: const Text('Login'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text('Forgot Password?'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
+// Sign Up Page
 class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text("Sign Up", style: TextStyle(fontFamily: 'CourierPrime')),
+        title: const Text('Sign Up', style: TextStyle(fontFamily: 'CourierPrime')),
         backgroundColor: Colors.deepPurple,
       ),
       body: Center(
-        child: Text(
-          'Sign Up Page Placeholder',
-          style: TextStyle(color: Colors.white, fontSize: 18),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                  prefixIcon: Icon(Icons.person, color: Colors.deepPurpleAccent),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Email Address',
+                  prefixIcon: Icon(Icons.email, color: Colors.deepPurpleAccent),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Mobile Number',
+                  prefixIcon: Icon(Icons.phone, color: Colors.deepPurpleAccent),
+                ),
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                  prefixIcon: Icon(Icons.lock, color: Colors.deepPurpleAccent),
+                ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 10),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: 'Confirm Password',
+                  prefixIcon: Icon(Icons.lock, color: Colors.deepPurpleAccent),
+                ),
+                obscureText: true,
+              ),
+              const SizedBox(height: 20),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                ),
+                onPressed: () {},
+                child: const Text('Confirm'),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
